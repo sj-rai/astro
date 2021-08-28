@@ -1,0 +1,18 @@
+---
+import shiki from 'shiki';
+import {CSS_THEME_URL, repairClassName, repairCssThemeColors} from './css-theme.js';
+const { code, lang = 'plaintext', theme = 'nord' } = Astro.props;
+
+let html: string;
+if (theme === 'css') {
+  const themeObject = await shiki.loadTheme(CSS_THEME_URL);
+  const highlighter = await shiki.getHighlighter({theme: themeObject});
+  const _html = highlighter.codeToHtml(code, lang);
+  html = repairCssThemeColors(repairClassName(_html));
+} else {
+  const highlighter = await shiki.getHighlighter({theme});
+  const _html = highlighter.codeToHtml(code, lang);
+  html = repairClassName(_html);
+}
+---
+{html}

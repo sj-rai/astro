@@ -20,16 +20,21 @@ See our [Markdown Guide](/guides/markdown-content) for more info.
 
 <!-- TODO: We should move some of the specific component info here. -->
 
-## `<Prism />`
+## `<Code />`
 
 ```astro
 ---
-import { Prism } from 'astro/components';
+import { Code } from 'astro/components';
 ---
-<Prism code={`const foo = 'bar';`} />
+<!-- Syntax highlight some JavaScript code. -->
+<Code code={`const foo = 'bar';`} lang="js" />
+<!-- Optional: customize your theme. -->
+<Code code={`const foo = 'bar';`} lang="js" theme="dark-plus" />
 ```
 
-This component provides syntax highlighting for code blocks. Since this never changes in the client it makes sense to use an Astro component (it's equally reasonable to use a framework component for this kind of thing; Astro is server-only by default for all frameworks!).
+This component provides syntax highlighting for code blocks at build time (no client-side JavaScript included). The component is powered internally by shiki and it supports all popular [themes](https://github.com/shikijs/shiki/blob/main/docs/themes.md) and [languages](https://github.com/shikijs/shiki/blob/main/docs/languages.md).
+
+You can also use the `<Prism />` component for syntax highlighting powered by the [Prism](https://prismjs.com/) syntax highlighting library. However, this component is deprecated and will be removed in our v1.0 release.
 
 ## `<Debug />`
 
