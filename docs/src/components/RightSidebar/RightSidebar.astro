@@ -1,8 +1,10 @@
 ---
+import * as CONFIG from '../config.ts';
 import TableOfContents from './TableOfContents.jsx';
 import MoreMenu from './MoreMenu.astro';
-const {content, githubEditUrl} = Astro.props;
+const {content, currentFile} = Astro.props;
 const headers = content.astro.headers;
+const githubEditUrl = CONFIG.GITHUB_EDIT_URL && (CONFIG.GITHUB_EDIT_URL + currentFile);
 ---
 <style>
   .sidebar-nav {
